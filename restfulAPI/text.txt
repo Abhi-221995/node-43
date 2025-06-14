@@ -1,0 +1,10 @@
+
+API 
+
+/users = get all the user data
+/api/users = get all the user data
+
+/users = post all the user data
+
+/users/:id = update the user data
+/users/:id = delete the user data
