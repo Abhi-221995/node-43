@@ -4,6 +4,7 @@ API
 /users = get all the user data
 /api/users = get all the user data
 
+/api/users/1 = get the data of particular user
 /users = post all the user data
 
 /users/:id = update the user data
