@@ -11,18 +11,18 @@ connectToMongoDB("mongodb://localhost:27017/short-url")
   .then(() => console.log("mongodb connected"))
   .catch((error) => console.log("error", error));
 
-//middlewares
+// Middlewares
 app.use(express.json());
 
+// Routes
 app.use("/url", urlRoute);
 
+// Redirect Handler
 app.get("/:shortId", async (req, res) => {
   const shortId = req.params.shortId;
 
   const entry = await URL.findOneAndUpdate(
-    {
-       shortId,
-    },
+    { shortId },
     {
       $push: {
         visitHistory: {
@@ -31,6 +31,10 @@ app.get("/:shortId", async (req, res) => {
       },
     }
   );
+
+  if (!entry) {
+    return res.status(404).json({ error: "Short URL not found" });
+  }
 
   res.redirect(entry.redirectURL);
 });
