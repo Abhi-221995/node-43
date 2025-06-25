@@ -20,28 +20,6 @@ connectToMongoDB("mongodb://localhost:27017/short-url")
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Routes
-app.use("/url", urlRoute);
-app.use("/", staticRoute);
-
-// app.get("/test", async (req, res) => {
-//   const allUrls = await URL.find({});
-
-//   return res.end(`
-//     <html>
-//     <head></head>
-//     <body>
-//       <ol>
-//       ${allUrls.map(
-//         (url) =>
-//           `<li>${url.shortId} - ${url.redirectURL} - ${url.visitHistory.length}</li>`
-//       )}
-//       </ol>
-//     </body>
-//     </html>`);
-// });
-
-// Redirect Handler
 app.get("/:shortId", async (req, res) => {
   const shortId = req.params.shortId;
 
@@ -62,6 +40,27 @@ app.get("/:shortId", async (req, res) => {
 
   res.redirect(entry.redirectURL);
 });
+
+// Routesj
+
+// app.get("/test", async (req, res) => {
+//   const allUrls = await URL.find({});
+
+//   return res.end(`
+//     <html>
+//     <head></head>
+//     <body>
+//       <ol>
+//       ${allUrls.map(
+//         (url) =>
+//           `<li>${url.shortId} - ${url.redirectURL} - ${url.visitHistory.length}</li>`
+//       )}
+//       </ol>
+//     </body>
+//     </html>`);
+// });
+
+// Redirect Handler
 
 app.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);
