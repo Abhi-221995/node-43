@@ -16,7 +16,7 @@ async function handleGenerateNewShortUrl(req, res) {
       visitHistory: [],
     });
 
-    return res.status(200).render("home", { id: shortID });
+    return res.redirect("/");
   } catch (err) {
     console.error("CREATE ERROR:", err); // Add this line
     return res.status(500).json({ error: "Failed to create short URL" });
